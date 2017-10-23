@@ -7,9 +7,14 @@
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 		<script src="js/importHtml.js" type="text/javascript" charset="utf-8"></script>
 		<import href="link-script.html#head-content"></import>
+		<script type="text/javascript">
+			$(function() {
+				console.log("link-script.html加载完了,nav.html还未加载(实现顺序加载)")
+			})
+		</script>
 	</head>
 
-	<body>
+	<body style="display: none;">
 		<import href="nav.html#nav"></import>
 		<div class="content" id="content">
 			<iframe name="demoframe" src="" width="100%" height="99%"></iframe>

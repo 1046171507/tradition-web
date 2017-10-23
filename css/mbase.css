@@ -9,6 +9,8 @@ body {
   font-size: 12px;
   font-family: "microsoft yahei", Arial;
   color: #000;
+  /*配合页面中的display: none消除页面的闪烁*/
+  display: block !important;
 }
 header,
 nav,

@@ -1,2 +1,2 @@
-/* 用于开发环境的批量替换 */
-$(function(){$('import').each(function(){var $this=$(this),$href=$this.attr('href');if($href){var $hrefSrc=$href.substring(0,$href.search('html')+4);var $hrefID=$href.substring($href.search('html')+4);$.get($hrefSrc,function(data){var content=$(data).filter($hrefID);$this.replaceWith(content);content=null})}})});
+/* 用于开发环境的批量替换(采用同步加载,保证执行顺序) */
+$(function(){$('import').each(function(){var $this=$(this),$href=$this.attr('href');if($href){var $hrefSrc=$href.substring(0,$href.search('html')+4);var $hrefID=$href.substring($href.search('html')+4);$.ajax({type:"get",url:$hrefSrc,async:false,success:function(data){var content=$(data).filter($hrefID);$this.replaceWith(content);content=null}})}})});
