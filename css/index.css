@@ -10,14 +10,6 @@ wrap {
 	height: 100%;
 }
 
-.nav-w {
-	width: 200px;
-	height: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-}
-
 .nav {
 	width: 200px;
 	height: 100%;
@@ -54,4 +46,5 @@ wrap {
 .content {
 	margin-left: 200px;
 	height: 100%;
+	padding: 10px 0 10px 10px;
 }

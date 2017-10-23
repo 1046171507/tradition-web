@@ -4,23 +4,16 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="ui组件/css/mbase.css" />
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/importHtml.js" type="text/javascript" charset="utf-8"></script>
+		<import href="link-script.html#head-content"></import>
 	</head>
 
 	<body>
-		<div class="nav-w" id="nav-w">
-			<div class="nav left MScroll" id="nav"></div>
-		</div>
+		<import href="nav.html#nav"></import>
 		<div class="content" id="content">
 			<iframe name="demoframe" src="" width="100%" height="99%"></iframe>
 		</div>
 	</body>
-	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$('#nav-w').load("nav.html #nav");
-		})
-	</script>
 
 </html>
