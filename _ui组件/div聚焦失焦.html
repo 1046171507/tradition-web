@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/mbase.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<pre></pre>
+		<div id="box" class="canFocus">
+			<h3>可点击DIV</h3>
+			<input type="text" name="" id="text" value="改为聚焦元素后,内部不能有聚焦元素" style="width: 300px;" />
+			<p style="display: none;">DIV聚焦</p>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$('#box').focus(function() {
+					console.log('div聚焦');
+					$('p').css('display', 'block');
+				});
+
+				$('#box').blur(function() {
+					console.log('div失焦');
+					$('p').css('display', 'none');
+				});
+
+				//移入触发聚焦事件;
+				$('#box').mouseenter(function() {
+					$(this).trigger('focus');
+				});
+
+			});
+		</script>
+	</body>
+
+</html>
