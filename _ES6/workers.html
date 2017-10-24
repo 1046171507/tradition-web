@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<button onclick="startWorker()">开始工作</button>
+		<button onclick="stopWorker()">停止工作</button>
+
+		<p><strong>注意：</strong> Internet Explorer 9 及更早 IE 版本浏览器不支持 Web Workers.</p>
+		<div id="box" name="box">box</div>
+
+		<script>
+			var w, i = 1;
+			var $box = document.querySelector('[name="box"]');
+			console.log($box);
+
+			function startWorker() {
+				if(typeof(Worker) !== "undefined") {
+					if(typeof(w) == "undefined") {
+						w = new Worker("js/workers.js");
+					}
+					setInterval(function() {
+						i++;
+						w.postMessage({
+							id: i,
+							msg: 'Hello World',
+						});
+					}, 1000);
+
+					w.onmessage = function(message) {
+						var data = message.data;
+						console.log(JSON.stringify(data));
+					};
+					w.onerror = function(error) {
+						console.log(error.filename, error.lineno, error.message);
+					}
+					/**/
+
+				} else {
+					document.getElementById("result").innerHTML = "抱歉，你的浏览器不支持 Web Workers...";
+				}
+			}
+
+			function stopWorker() {
+				w.terminate();
+				w = undefined;
+			}
+		</script>
+
+	</body>
+
+</html>
