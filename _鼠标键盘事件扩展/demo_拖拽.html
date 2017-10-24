@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>拖拽</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/mbase.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.move {
+				width: 100px;
+				height: 100px;
+				background-color: #0077FF;
+				position: absolute;
+				left: 0px;
+				top: 100px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<pre>
+		拖拽事件:不能后绑定
+		$('.move').move(function() {
+			$(this).css({
+				'left': '+=' + this.pageXc,
+				'top': '+=' + this.pageYc
+			});
+		});
+		</pre>
+		<div class="move"></div>
+
+		<script type="text/javascript">
+			$(function() {
+				$('.move').move(function() {
+					$(this).css({
+						'left': '+=' + this.pageXc,
+						'top': '+=' + this.pageYc
+					});
+				});
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>val改变</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/mbase.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<pre>
+		input的val改变事件:
+		$('.text').input(function() {this.value})
+		</pre>
+		<input class="text" type="text" name="" id="text" value="000" />
+		<div></div>
+		<script type="text/javascript">
+			$(function() {
+				$('.text').input(function() {
+					$('div').html('val发生改变,值为:' + this.value);
+				})
+			});
+		</script>
+	</body>
+
+</html>

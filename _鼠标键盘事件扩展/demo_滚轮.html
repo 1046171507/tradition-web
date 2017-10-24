@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>拖拽</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/mbase.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<pre>
+滚轮滚动事件:
+$(document).mousewheel(function() {
+	document.write('向下滚动:' + this.Down);
+});
+		</pre>
+		<div></div>
+		<script type="text/javascript">
+			$(function() {
+				$(document).mousewheel(function() {
+					$('div').html('向下滚动:' + this.Down);
+				});
+			});
+		</script>
+	</body>
+
+</html>

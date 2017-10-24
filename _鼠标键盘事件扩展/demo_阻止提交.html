@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>回车提交</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<form id="form">
+			<input type="text" name="text" id="text" value="" />
+			<input type="email" name="email" id="email" value="" />
+			<input id="submit" type="submit" value="提交" />
+		</form>
+		<script type="text/javascript">
+			$(function() {
+				$("#form").submit(function(ev) {
+					ev.preventDefault();
+				});
+			});
+		</script>
+	</body>
+
+</html>

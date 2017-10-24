@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>鼠标框选</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/mbase.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body {
+				padding: 100px;
+			}
+			
+			.drag-area {
+				padding: 40px;
+				border: 1px solid #000000;
+			}
+			
+			.drag-area div {
+				width: 100px;
+				height: 100px;
+				text-align: center;
+				line-height: 100px;
+				font-size: 12px;
+				border: 5px solid #ccc;
+				margin-right: 10px;
+				margin-bottom: 10px;
+				box-sizing: border-box;
+			}
+			
+			.seled {
+				border: 1px solid red;
+				background-color: #D6DFF7;
+			}
+			
+			.area-checked {
+				background: #0077FF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<pre>
+鼠标框选:
+		</pre>
+		<div class="overflow drag-area">
+			<div class="left in-area">浮动元素</div>
+			<div class="in-area" style="display: inline;">行内元素</div>
+			<div class="fileDiv in-area" style="position: absolute; left: 340px; top: 200px;">定位元素</div>
+			<div class="fileDiv">不复制元素</div>
+		</div>
+		<script type="text/javascript">
+			/*
+			 * 鼠标框选
+			 */
+			//鼠标框选事件$('.drag-area').dragaarea(function(ev) {this.areachecked/*框选中的元素class:in-area;*/});
+			//默认可框选元素class='in-area';
+			$.fn.dragaarea = function(Fn) {
+				$(this).mousedown(function(ev) {
+					var downthis = this,
+						oArea = $(this),
+						aDom = oArea.find('.in-area'),
+						aDragArea = [],
+						aDragAreachecked = [],
+						mDown = {
+							'pageX': ev.pageX,
+							'pageY': ev.pageY
+						},
+						mMove = {};
+					aDom.removeClass('area-checked');
+					aDom.each(function(i) {
+						var _this = $(this),
+							thisOffLeft = _this.offset().left,
+							thisOffTop = _this.offset().top,
+							oDragArea = {
+								'index': i,
+								'checked': false,
+								'offsetLeft': thisOffLeft,
+								'offsetTop': thisOffTop,
+								'offsetRight': thisOffLeft + _this.outerWidth(),
+								'offsetBottom': thisOffTop + _this.outerHeight()
+							};
+						aDragArea.push(oDragArea);
+					});
+
+					$(document).on('mousemove.thisDragArea', function(ev) {
+						ev.preventDefault();
+						mMove = {
+							'pageX': ev.pageX,
+							'pageY': ev.pageY
+						};
+						aDragAreachecked = [];
+						$.each(aDragArea, function(i, n) {
+							if((n['offsetLeft'] >= mDown['pageX']) && (n['offsetTop'] >= mDown['pageY']) && (n['offsetRight'] <= mMove['pageX']) && (n['offsetBottom'] <= mMove['pageY'])) {
+								if(!n['checked']) {
+									n['checked'] = true;
+								};
+							} else {
+								if(n['checked']) {
+									n['checked'] = false;
+								};
+							};
+							if(n['checked']) {
+								aDragAreachecked.push(aDom.get(n['index']));
+							};
+						});
+						downthis.areachecked = aDragAreachecked;
+						Fn.apply(downthis);
+					});
+					$(document).on('mouseup.thisDragArea', function(ev) {
+						$(this).off('mousemove.thisDragArea mouseup.thisDragArea');
+					});
+				});
+			};
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				//框选函数调用
+				$('.drag-area').dragaarea(function(ev) {
+					$('.in-area').removeClass('area-checked');
+					$(this.areachecked).addClass('area-checked');
+				});
+				//框选蒙层
+				//此处很粗糙,如果使用,请重写↓↓
+				var mc = $("<span id='mengc'>");
+				$('.drag-area').mousedown(function(ev) {
+					$("#mengc").attr('style', '').remove();
+					$('body').append(mc);
+					mc.css({
+						'position': 'fixed',
+						'background-color': 'rgba(0,0,0,0.2)',
+						'left': ev.pageX,
+						'top': ev.pageY
+					});
+
+				});
+				$('.drag-area').move(function() {
+					mc.css({
+						'width': '+=' + this.pageXc,
+						'height': '+=' + this.pageYc
+					});
+				});
+			});
+		</script>
+	</body>
+
+</html>
