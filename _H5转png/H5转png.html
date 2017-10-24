@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="html2canvas.js" type="text/javascript" charset="utf-8"></script>
+		<div id="tbl_exception" style="width: 100px; height: auto;">
+			<div style="background: url(bd_logo1_31bdc765.png); background-size: 100% 100%; width: 100px; height: 100px;">
+				<p>背景</p>
+				<p>文字</p>
+			</div>
+			<img src="bd_logo1_31bdc765.png" style="width: 100px; height: 100px;" />
+			<p>svg支持不好(应用的svg技术,里面不能再嵌套svg)</p>
+		</div>
+
+		<script type="text/javascript">
+			setTimeout(function() {
+				html2canvas($("#tbl_exception"), {
+					onrendered: function(canvas) {
+						var url = canvas.toDataURL();
+						/**/
+						var img = document.createElement("img");
+						img.src = url;
+						img.onload = function() {
+							var canvas2 = document.createElement("canvas");
+							canvas2.width = (canvas.width) * 2;
+							canvas2.height = (canvas.height) * 2;
+							var ctx2 = canvas2.getContext("2d");
+							ctx2.drawImage(img, 0, 0, canvas2.width, canvas2.height);
+							url = canvas2.toDataURL();
+							//以下代码为下载此图片功能
+							var triggerDownload = $("<a>").attr("href", url).attr("download", "异常信息.png").appendTo("body");
+							triggerDownload[0].click();
+							triggerDownload.remove();
+						};
+						/**/
+
+					}
+				});
+			}, 1000);
+		</script>
+	</body>
+
+</html>
