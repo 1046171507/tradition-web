@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script src="js/requireVue.js"></script>
+	</head>
+
+	<body>
+		<div id="box">
+			<dom-a></dom-a>
+			<dom-b :children-a="childrenA"></dom-b>
+			<p>{{childrenA}}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el: "#box",
+			components: {
+				"dom-a": requireVue('components/a.vue'),
+				"dom-b": requireVue('components/b.vue')
+			},
+			data: function() {
+				return {
+					childrenA: null
+				}
+			},
+			mounted: function() { //类似于回调函数(初次实例化完成后调用)
+			},
+		});
+	</script>
+
+</html>
