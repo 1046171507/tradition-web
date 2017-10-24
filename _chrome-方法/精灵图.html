@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+	</head>
+
+	<body>
+		<canvas id="canvas_box" width="" height=""></canvas>
+		<script>
+			imgAllFn = function(name, size, w, h) {
+				var imgAll = [];
+				var i = 1;
+				imgFn = function() {
+					if(i <= size) {
+						imgAll[i - 1] = document.createElement("img");
+						var _i;
+						if(i >= 0 && i < 10) {
+							_i = '000' + i;
+						}
+						if(i >= 10 && i < 100) {
+							_i = '00' + i;
+						}
+						if(i >= 100 && i < 1000) {
+							_i = '0' + i;
+						}
+						imgAll[i - 1].src = "spriteAll/" + name + _i + '.png';
+						_this = imgAll[i - 1];
+						i++;
+						imgFn();
+					}
+				};
+				imgFn();
+				setTimeout(function() {
+					console.log(imgAll);
+					var c = document.getElementById('canvas_box');
+					var ctx = c.getContext("2d");
+					c.width = w;
+					c.height = size * h;
+					for(var i = 0; i < size; i++) {
+						ctx.drawImage(imgAll[i], 0, i * h);
+					}
+				}, 500);
+			};
+			
+			//调用
+			imgAllFn('loading', 29, 70, 60);
+		</script>
+	</body>
+
+</html>

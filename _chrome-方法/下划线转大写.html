@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<textarea id="textarea-0" style="width: 800px; height: 800px;"><div>a_1 a_A a_a</div></textarea>
+		<input type="button" id="anliu" value="下划线转大写" />
+		<script type="text/javascript">
+			$(function() {
+				$('#anliu').click(function() {
+					var $val = $('#textarea-0').val().split('');
+					for(var i = $val.length - 2, len = $val.length; i > 0; i--) {
+						if((/[A-Za-z]/.test($val[i - 1])) && ($val[i] == '_') && (/[A-Za-z]/.test($val[i + 1]))) {
+							var $val2 = $val[i + 1].toUpperCase();
+							$val[i + 1] = $val2;
+							$val.splice(i, 1);
+						}
+					}
+					var str = $val.join("");
+					$('#textarea-0').val(str);
+				});
+			})
+		</script>
+	</body>
+
+</html>
