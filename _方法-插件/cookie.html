@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>本地存储</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			//cookie
+			(function() {
+				$.cookie('theCookie', 'theValue'); // 设置cookie
+				$.cookie('theCookie'); // 获得cookie
+				$.cookie('theCookie', 'theValue', {
+					expires: 7
+				}); //设置带时间的cookie
+				$.cookie('theCookie', '', {
+					expires: -1
+				}); // 删除
+				$.cookie('theCookie', null); // 删除 cookie
+				$.cookie('theCookie', 'theValue', {
+					expires: 7,
+					path: '/',
+					domain: 'jquery.com',
+					secure: true
+				}); //新建一个cookie 包括有效期 路径 域名等
+			})();
+		</script>
+	</body>
+
+</html>

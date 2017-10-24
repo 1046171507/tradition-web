@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/mbase.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div style="width:2000px; height: 2000px;">
+			<input type="text" name="" class="relevancy" data-list="1,11,12,23,34,45"/>
+			<input type="text" name="" class="relevancy" data-list="1,11,1112,1113,34,45" />
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				//输入框关联信息展示
+				$('.relevancy').input(function() {
+					var _val = $(this).val(),
+						aDataV = [];
+					if(/\S/.test(_val)) {
+						var aData = $(this).data('list').split(',');
+						for(var i = 0, len = aData.length; i < len; i++) {
+							if(aData[i].indexOf(_val) != -1) {
+								aDataV.push(aData[i]);
+							}
+						};
+					};
+					console.log(aDataV)
+				});
+			});
+		</script>
+		</div>
+	</body>
+
+</html>

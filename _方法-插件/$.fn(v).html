@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<pre>jQuery方法扩展:</pre>
+		<div></div>
+		<script type="text/javascript">
+			//fn相当于prototype
+			//此处用的不是$(dom).Ev(fn(ev));
+			$(function() {
+				//jQuery插件注入
+
+				$.extend({
+					"mValue": 'Value共用一套:',
+					"minValue": function(a, b) {
+						$('pre').get(0).innerHTML += '<br>' + $.mValue + (a < b ? a : b);
+						$.mValue = 'Value可以被第一次调用改变:';
+					},
+					"maxValue": function(a, b) {
+						$('pre').get(0).innerHTML += '<br>' + $.mValue + (a > b ? a : b);
+					}
+				});
+
+				//调用
+				var i = 100;
+				j = 101;
+				$.minValue(i, j); // minV 等于 100
+				//区别于面向对象,两次调用指向的作用域是一样的
+				$.maxValue(i, j); // maxV 等于 101
+			});
+		</script>
+	</body>
+
+</html>

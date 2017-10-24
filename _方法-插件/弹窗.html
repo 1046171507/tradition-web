@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/layer/2.3/layer.min.js"></script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			$(function() {
+				layer.open({
+					title: '标题',
+					type: 1,
+					shift: 2,
+					area: '450px',
+					shadeClose: true, //开启遮罩关闭
+					content: '<div style="text-align: center;">内容</div>',
+					btn: ['确定', '取消'], //按钮
+					success: function(layero, index) {
+						//alert('弹层加载完');
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>

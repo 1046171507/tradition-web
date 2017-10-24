@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		可以直接用jq删除添加&lt;style&gt;body{background-color: #eee;}&lt;/style&gt;
+	</body>
+	<script type="text/javascript">
+		var newStyle='\n body{background-color: #eee;} \n';
+		if(!document.getElementById('newStyle')) {
+			var d = document;
+			var tag = document.createElement('style');
+			document.getElementsByTagName('head')[0].appendChild(tag);
+			tag.id = 'newStyle';
+			tag.setAttribute('type', 'text/css');
+		}
+		var tag = document.getElementById('newStyle');
+		if(tag.styleSheet) {
+			tag.styleSheet.cssText = newStyle;
+		} else {
+			tag.innerHTML = '';
+			tag.appendChild(document.createTextNode(newStyle));
+		}
+	</script>
+
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/libertyDate.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/libertyDate-lunar.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+
+	<body style="display: none;">
+		<div id="date-box">
+			<a class="pre">pre</a>
+			<a class="next">next</a>
+			<h4 class="year-month"></h4>
+			<div class="dateAll"></div>
+		</div>
+		<style type="text/css">
+			#date-box {
+				width: 400px;
+				border: 1px solid #CCCCCC;
+				position: relative;
+			}
+			
+			#date-box a {
+				width: 40px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				cursor: pointer;
+				position: absolute;
+				top: 0;
+				z-index: 2;
+			}
+			
+			#date-box a:hover {
+				color: #0000FF;
+			}
+			
+			#date-box a.pre {
+				left: 0;
+			}
+			
+			#date-box a.next {
+				right: 0;
+			}
+			
+			#date-box .year-month {
+				height: 40px;
+				line-height: 40px;
+				font-size: 18px;
+				text-align: center;
+			}
+			
+			#date-box table {
+				width: 100%;
+				text-align: center;
+			}
+			
+			#date-box table th,
+			#date-box table td {
+				border: 1px solid #EEEEEE;
+				line-height: 24px;
+			}
+			
+			#date-box table div {
+				height: 74px;
+			}
+			
+			.disabled {
+				cursor: no-drop;
+			}
+			
+			.no-zoom {
+				background: #EEEEEE;
+			}
+		</style>
+		<style type="text/css">
+			.dateAll .nowBg {
+				background-color: #ff0;
+			}
+			
+			.dateAll .weekendC {
+				color: #f00;
+			}
+			
+			.dateAll .festivalC {
+				color: #f00;
+			}
+			
+			.dateAll .clickBg {
+				background-color: #f0f;
+				color: #FFFFFF;
+			}
+		</style>
+		<script type="text/javascript">
+			document.body.style.display = 'block';
+
+			var dateFn = function(year_month) {
+				$year_month.html(_year + '年' + _month + '月');
+				mlibertyDate.setViewHead(['<span style="color:#f00">日</span>', '一', '二', '三', '四', '五', '<span style="color:#f00">六</span>']);
+				mlibertyDate.createView($$dateAll, year_month, function(d, ld) {
+					var LunarDate = (ld.lLeapMonth) ? ld.lLeapMonth : ld.lDayCh;
+					var solarTerms = (ld.solarTerms) ? ld.solarTerms : '';
+					var lunarFestival = (ld.lunarFestival) ? ld.lunarFestival : '';
+					var solarFestival = (ld.solarFestival) ? ld.solarFestival : '';
+					var Festival = solarFestival ? solarFestival : (lunarFestival ? lunarFestival : (solarTerms ? solarTerms : LunarDate));
+					var bg_color = (d.date == mlibertyDate.nowDate) ? ' nowBg' : '';
+					var _color = (solarTerms || lunarFestival || solarFestival) ? ' festivalC' : '';
+					var _color2 = (d._day == 6 || d._day == 0) ? 'weekendC' : '';
+					var _class = ' class="' + bg_color + _color + '"';
+					var _class2 = ' class="' + _color2 + '"';
+					var _html = '<div' + _class + '><span' + _class2 + '>' + d['date'].split('-')[2] + '</span></br><span>' + Festival + '</span></div>';
+					return _html;
+				});
+			};
+			var mstyle = {
+				nowBg: '#ff0',
+				weekendC: '#f00',
+				festivalC: '#f00',
+				clickBg: '#f0f'
+			};
+
+			var $year_month = $('#date-box .year-month');
+			var $$dateAll = $('#date-box .dateAll').get(0);
+			var nowDate = new Date();
+			var _year = nowDate.getFullYear();
+			var _month = nowDate.getMonth() + 1;
+			var mlibertyDate = new libertyDate();
+			dateFn(_year + '-' + _month);
+			//console.log($$dateAll.dateDataNow);
+			$('#date-box .pre').click(function() {
+				nowDate.setMonth(nowDate.getMonth() - 1);
+				var _year = nowDate.getFullYear();
+				var _month = nowDate.getMonth() + 1;
+				dateFn(_year + '-' + _month);
+			});
+			$('#date-box .next').click(function() {
+				nowDate.setMonth(nowDate.getMonth() + 1);
+				var _year = nowDate.getFullYear();
+				var _month = nowDate.getMonth() + 1;
+				dateFn(_year + '-' + _month);
+			});
+
+			$('#date-box').on('click', '[date-data]', function() {
+				$('#date-box [date-data]').removeClass('clickBg');
+				$(this).addClass('clickBg');
+				var _date = $(this).attr("date-data");
+				var _dateAll = [_date.substring(0, 4), _date.substring(4, 6), _date.substring(6, 8)];
+				console.log(_dateAll)
+			});
+			/*//插入交互事件
+			$('#box [date-data]').click(function() {
+			var checkedBl = true;
+			var _$this = $(this);
+			$.each(mlibertyDate['checked'], function(i) {
+				if(mlibertyDate['checked'][i] == _$this.attr('date-data')) {
+					checkedBl = false
+				};
+			});
+			if(checkedBl) {
+				mlibertyDate['checked'].push(this.getAttribute('date-data'));
+			};
+			console.log($('#box')[0]['dateData']);
+			});*/
+
+			/*var newdateData = [{
+				'date': '2017-4-15',
+				'zoom': 0,
+				'price': 1000
+			}, {
+				'date': '2017-4-16',
+				'zoom': 3,
+				'price': 1000,
+				'a': 111
+			}, {
+				'date': '2017-4-17',
+				'zoom': 5,
+				'price': 1000
+			}, {
+				'date': '2017-4-16',
+				'zoom': 10,
+				'price': 1000
+			}];
+
+			mlibertyDate.setNowDate('2017-04-1'); //设置当前时间
+			mlibertyDate.setDateData(newdateData); //设置时间参数
+			mlibertyDate.setDisabled({ //设置禁选项
+				disabledType: 'zoom',
+				disabledValue: function(zoom) {
+					if(zoom <= 5) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			});
+			console.log('获取所以时间配置:', mlibertyDate.getDateData());
+			console.log('获取设置月时间配置:', mlibertyDate.getNowDateData());
+			//console.log('获取控件:', mlibertyDate);*/
+
+			//console.log('获取控件:', mlibertyDate);
+			//console.log('获取禁选值:', mlibertyDate.disabled);
+			//console.log('获取当前时间:', mlibertyDate.getNowDate());
+			//console.log('设置当前时间:', mlibertyDate.setNowDate('2017-05-1'));
+			//console.log('获取所以时间配置:', mlibertyDate.getDateData());
+			//console.log('获取设置月时间配置:', mlibertyDate.getNowDateData());
+		</script>
+	</body>
+
+</html>

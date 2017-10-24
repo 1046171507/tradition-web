@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/libertyDate.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<div id="date-box">
+			<a class="pre">pre</a>
+			<a class="next">next</a>
+			<h4 class="year-month"></h4>
+			<div class="dateAll"></div>
+		</div>
+		<style type="text/css">
+			#date-box {
+				width: 600px;
+				border: 1px solid #CCCCCC;
+				position: relative;
+			}
+			
+			#date-box a {
+				width: 40px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				cursor: pointer;
+				position: absolute;
+				top: 0;
+				z-index: 2;
+			}
+			
+			#date-box a:hover {
+				color: #0000FF;
+			}
+			
+			#date-box a.pre {
+				left: 0;
+			}
+			
+			#date-box a.next {
+				right: 0;
+			}
+			
+			#date-box .year-month {
+				height: 40px;
+				line-height: 40px;
+				font-size: 18px;
+				text-align: center;
+			}
+			
+			#date-box table {
+				width: 100%;
+				text-align: center;
+			}
+			
+			#date-box table th,
+			#date-box table td {
+				border: 1px solid #EEEEEE;
+				line-height: 24px;
+			}
+			
+			#date-box table div {
+				height: 74px;
+			}
+			
+			.disabled {
+				cursor: no-drop;
+			}
+			
+			.no-zoom {
+				background: #EEEEEE;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function() {
+				var mlibertyDate = new libertyDate({
+					dateData: [{
+						'date': '2017-5-1',
+						'zoom': 0,
+						'price': 500
+					}, {
+						'date': '2017-5-2',
+						'zoom': 3,
+						'price': 500
+					}, {
+						'date': '2017-5-3',
+						'zoom': 5,
+						'price': 500
+					}, {
+						'date': '2017-5-4',
+						'zoom': 10,
+						'price': 500
+					}, {
+						'date': '2017-5-5',
+						'zoom': 10,
+						'price': 500
+					}, {
+						'date': '2017-5-10',
+						'zoom': 3,
+						'price': 500
+					}, {
+						'date': '2017-5-13',
+						'zoom': 5,
+						'price': 500
+					}, {
+						'date': '2017-5-14',
+						'zoom': 10,
+						'price': 500
+					}, {
+						'date': '2017-5-15',
+						'zoom': 10,
+						'price': 500
+					}, {
+						'date': '2017-5-22',
+						'zoom': 3,
+						'price': 500
+					}, {
+						'date': '2017-5-23',
+						'zoom': 5,
+						'price': 500
+					}, {
+						'date': '2017-5-24',
+						'zoom': 10,
+						'price': 500
+					}, {
+						'date': '2017-5-25',
+						'zoom': 10,
+						'price': 500
+					}],
+					startTime: '2017-4-15',
+					endTime: '2017-5-15',
+					disabled: {
+						disabledType: 'zoom',
+						disabledValue: [0]
+					}
+
+				});
+
+				//console.log('获取控件:', mlibertyDate);
+				//console.log('获取禁选值:', mlibertyDate.disabled);
+				//console.log('获取当前时间:', mlibertyDate.getNowDate());
+				//console.log('设置当前时间:', mlibertyDate.setNowDate('2017-05-1'));
+				//console.log('获取所以时间配置:', mlibertyDate.getDateData());
+				//console.log('获取设置月时间配置:', mlibertyDate.getNowDateData());
+				//配置文字
+				mlibertyDate.setViewHead(['<span style="color:#f00">日</span>', '一', '二', '三', '四', '五', '<span style="color:#f00">六</span>']);
+				//生成日历
+				$('#date-box .year-month').html('2017-05');
+				mlibertyDate.createView($('#date-box .dateAll').get(0), '2017-5-1', function(d, ld) {
+					console.log(d, ld);
+					var _color = (d['_day'] == 0 || d['_day'] == 6) ? '#f00' : '';
+					var _zoom = d['zoom'] > 0 ? d['zoom'] + '间' : '无房';
+					var _price = d['price'] ? '¥' + d['price'] + '元' : '';
+					var _class1 = d['disabled'] ? 'disabled' : '';
+					var _class2 = d['zoom'] > 0 ? 'zoom' : 'no-zoom'
+					var _html = '<div class="' + _class1 + ' ' + _class2 + '"><span style="color:' + _color + '">' + d['date'].split('-')[2] + '</sapn></br><span>' + _zoom + '</span></br><span>' + _price + '</span></div>';
+					return _html;
+				});
+				//插入交互事件
+				$('#box [date-data]').click(function() {
+					var checkedBl = true;
+					var _$this = $(this);
+					$.each(mlibertyDate['checked'], function(i) {
+						if(mlibertyDate['checked'][i] == _$this.attr('date-data')) {
+							checkedBl = false
+						};
+					});
+					if(checkedBl) {
+						mlibertyDate['checked'].push(this.getAttribute('date-data'));
+					};
+					console.log($('#box')[0]['dateData']);
+				});
+
+				/*var newdateData = [{
+					'date': '2017-4-15',
+					'zoom': 0,
+					'price': 1000
+				}, {
+					'date': '2017-4-16',
+					'zoom': 3,
+					'price': 1000,
+					'a': 111
+				}, {
+					'date': '2017-4-17',
+					'zoom': 5,
+					'price': 1000
+				}, {
+					'date': '2017-4-16',
+					'zoom': 10,
+					'price': 1000
+				}];
+
+				mlibertyDate.setNowDate('2017-04-1'); //设置当前时间
+				mlibertyDate.setDateData(newdateData); //设置时间参数
+				mlibertyDate.setDisabled({ //设置禁选项
+					disabledType: 'zoom',
+					disabledValue: function(zoom) {
+						if(zoom <= 5) {
+							return true;
+						} else {
+							return false;
+						}
+					}
+				});
+				console.log('获取所以时间配置:', mlibertyDate.getDateData());
+				console.log('获取设置月时间配置:', mlibertyDate.getNowDateData());
+				//console.log('获取控件:', mlibertyDate);*/
+			});
+		</script>
+	</body>
+
+</html>
