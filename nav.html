@@ -1,34 +1,21 @@
-<!DOCTYPE html>
-<html>
-
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-		<script src="js/importHtml.js" type="text/javascript" charset="utf-8"></script>
-		<import href="link-script.html#head-content"></import>
-	</head>
-
-	<body>
-		<div class="nav left MScroll" id="nav">
-			<!--原生模拟扩展开始-->
-			<a class="nav-h">原生模拟扩展</a>
-			<div>
-				<a href="ui组件/自定义优化.html" target="demoframe">自定义优化</a>
-				<a href="ui组件/单复选框.html" target="demoframe">单复选框</a>
-				<a href="ui组件/模拟下拉框.html" target="demoframe">模拟下拉框</a>
-				<a href="ui组件/模拟数字输入框.html" target="demoframe">模拟数字输入框</a>
-				<a href="ui组件/模拟滑动输入.html" target="demoframe">模拟滑动输入</a>
-				<a href="ui组件/模拟滚动条.html" target="demoframe">模拟滚动条</a>
-				<a href="ui组件/模拟表格.html" target="demoframe">模拟表格</a>
-				<a href="ui组件/模拟颜色选择.html" target="demoframe">模拟颜色选择</a>
-				<a href="ui组件/分页.html" target="demoframe">分页</a>
-			</div>
-			<!--原生模拟扩展结束-->
-			<script type="text/javascript">
-				console.log('nav.html加载了')
-			</script>
-		</div>
-	</body>
-
-</html>
+<meta charset="UTF-8">
+<script src="js/jquery.min.js"></script>
+<import href="link-script.html#head-content"></import>
+<div class="nav left MScroll" id="nav">
+	<p>整套Demo组件都是采用的同步加载(阻塞加载),没用require.js等同步按需加载。虽然影响性能,但是程序更加简洁,切便于生产环境批量替换(组件替换到组件引入处即可)</p>
+	<!--原生模拟扩展开始-->
+	<a class="nav-h">原生模拟扩展</a>
+	<div>
+		<a id="a-1" href="_ui组件/自定义优化.html" target="demoframe"><span>自定义优化</span></a>
+		<a href="_ui组件/单复选框.html" target="demoframe">单复选框</a>
+		<a href="_ui组件/模拟下拉框.html" target="demoframe">模拟下拉框</a>
+		<a href="_ui组件/模拟数字输入框.html" target="demoframe">模拟数字输入框</a>
+		<a href="_ui组件/模拟滑动输入.html" target="demoframe">模拟滑动输入</a>
+		<a href="_ui组件/模拟滚动条.html" target="demoframe">模拟滚动条</a>
+		<a href="_ui组件/模拟表格.html" target="demoframe">模拟表格</a>
+		<a href="_ui组件/模拟颜色选择.html" target="demoframe">模拟颜色选择</a>
+		<a href="_ui组件/分页.html" target="demoframe">分页</a>
+	</div>
+	<!--原生模拟扩展结束-->
+	<script src="js/app/nav.js" type="text/javascript" charset="utf-8"></script>
+</div>
