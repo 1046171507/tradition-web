@@ -1,5 +1,6 @@
 <template>
 	<div class="a">
+		<slot>A组件的插槽</slot>
 		<span>我是A组件的数据->{{a}}</span>
 		<input type="button" value="把A数据传给父组件->进一步传递给B" @click="send">
 		<dom-c></dom-c>
@@ -25,7 +26,6 @@
 			}
 		},
 		mounted: function() { //类似于回调函数(初次实例化完成后调用)
-			console.log(this)
 		},
 	}
 </script>

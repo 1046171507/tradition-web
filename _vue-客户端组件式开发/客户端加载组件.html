@@ -4,19 +4,22 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="https://1046171507.github.io/tradition-web/js/jquery.min.js"></script>
 		<script src="js/vue.min.js"></script>
-		<script src="js/requireVue.js"></script>
+		<import href="components/iview.html"></import>
 	</head>
 
 	<body>
 		<div id="box">
-			<dom-a></dom-a>
+			<p>我是父组件,接受子组件的数据:{{childrenA}}</p>
+			<dom-a>
+				<p>父组件传递给A组件的插槽</p>
+			</dom-a>
 			<dom-b :children-a="childrenA"></dom-b>
-			<p>{{childrenA}}</p>
 		</div>
 	</body>
-	<script type="text/javascript">
+	<!--<script type="text/javascript">
+		//import同步加载都是基于jq的dom加载完后执行,所以把此处改为外部的dom加载完后执行
 		new Vue({
 			el: "#box",
 			components: {
@@ -31,6 +34,7 @@
 			mounted: function() { //类似于回调函数(初次实例化完成后调用)
 			},
 		});
-	</script>
+	</script>-->
+	<script src="js/app.js"></script>
 
 </html>

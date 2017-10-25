@@ -10,7 +10,7 @@ $(function() {
 				url: $hrefSrc,
 				async: false,
 				success: function(data) {
-					var content = $(data).filter($hrefID);
+					var content = $hrefID ? $(data).filter($hrefID) : $(data);
 					$this.replaceWith(content);
 					content = null
 				},
