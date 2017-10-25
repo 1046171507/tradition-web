@@ -18,7 +18,9 @@
 		props: ['children-a'],
 		methods: {
 			change() {
-				alert('开关状态：' + status);
+				setTimeout(()=>{
+					alert('开关状态：' + this.switch1);
+				},1000)
 			}
 		},
 		//钩子,类似于回调函数(实例化完成后调用)
