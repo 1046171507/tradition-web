@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/iview/2.4.0/styles/iview.css" />
+		<script src="http://cdn.bootcss.com/iview/2.4.0/iview.min.js"></script>
+	</head>
+
+	<body>
+		<div id="app-0">
+			<div>
+				<Radio v-model="single">Radio</Radio>
+				{{single}}
+			</div>
+			<div>
+				<Radio-group v-model="phone">
+					<Radio label="apple">
+						<Icon type="social-apple"></Icon>
+						<span>Apple</span>
+					</Radio>
+					<Radio label="android">
+						<Icon type="social-android"></Icon>
+						<span>Android</span>
+					</Radio>
+					<Radio label="windows">
+						<Icon type="social-windows"></Icon>
+						<span>Windows</span>
+					</Radio>
+				</Radio-group><br />
+				<Radio-group v-model="animal">
+					<Radio label="金斑蝶"></Radio>
+					<Radio label="爪哇犀牛"></Radio>
+					<Radio label="印度黑羚"></Radio>
+				</Radio-group>
+				选中:{{phone}}{{animal}}
+			</div>
+			<div>ionic:
+				<Icon type="ionic" size="30"></Icon>
+			</div>
+			<div>
+				<Checkbox-group v-model="social">
+					<Checkbox label="twitter">
+						<Icon type="social-twitter"></Icon>
+						<span>Twitter</span>
+					</Checkbox>
+					<Checkbox label="facebook">
+						<Icon type="social-facebook"></Icon>
+						<span>Facebook</span>
+					</Checkbox>
+					<Checkbox label="github">
+						<Icon type="social-github"></Icon>
+						<span>Github</span>
+					</Checkbox>
+					<Checkbox label="snapchat">
+						<Icon type="social-snapchat"></Icon>
+						<span>Snapchat</span>
+					</Checkbox>
+				</Checkbox-group>
+				<Checkbox-group v-model="fruit">
+					<Checkbox label="香蕉" disabled></Checkbox>
+					<Checkbox label="苹果"></Checkbox>
+					<Checkbox label="西瓜"></Checkbox>
+				</Checkbox-group>
+				选中:{{social}}{{fruit}}
+				<div>
+					<i-switch :disabled="disabled"></i-switch>
+					<i-switch v-model="switchr">
+						<span slot="open">开</span>
+						<span slot="close">关</span>
+					</i-switch>
+					<i-switch>
+						<Icon type="android-done" slot="open"></Icon>
+						<Icon type="android-close" slot="close"></Icon>
+					</i-switch>
+					开::{{switchr}}
+					<br><br>
+					<i-switch size="large">
+						<span slot="open">开启</span>
+						<span slot="close">关闭</span>
+					</i-switch>
+					<i-switch size="large">
+						<span slot="open">ON</span>
+						<span slot="close">OFF</span>
+					</i-switch>
+				</div>
+			</div>
+			<div>
+				<Row>
+					<i-Col span="8">24栅格-col-8</i-col>
+					<i-Col span="8">24栅格-col-8</i-col>
+					<i-Col span="8">24栅格-col-8</i-col>
+				</Row>
+				<Row>
+					<i-Col span="12">
+						<Date-picker type="date" :options="options1" placeholder="选择日期" style="width: 200px"></Date-picker>
+					</i-Col>
+					<i-Col span="12">
+						<Date-picker type="daterange" :options="options2" placement="bottom-end" placeholder="选择日期" style="width: 200px;" @click="console.log(11)"></Date-picker>
+					</i-Col>
+				</Row>
+			</div><br />
+			<div>
+				<i-Select v-model="model10" multiple style="width:200px">
+					<i-Option v-for="item in cityList" :value="item.value" :key="item">{{ item.label }}</i-Option>
+				</i-Select>
+			</div>
+		</div>
+		<script>
+			new Vue({
+				el: '#app-0',
+				data: {
+					single: false,
+					phone: 'apple',
+					animal: '爪哇犀牛',
+					social: ['facebook', 'github'],
+					fruit: ['苹果'],
+					disabled: true,
+					switchr: true,
+
+					options1: {
+						shortcuts: [{
+								text: '今天11',
+								value() {
+									return new Date();
+								},
+								onClick: (picker) => {
+									picker.$Message.info('点击了今天');
+								}
+							},
+							{
+								text: '昨天22',
+								value() {
+									const date = new Date();
+									date.setTime(date.getTime() - 3600 * 1000 * 24);
+									return date;
+								},
+								onClick: (picker) => {
+									picker.$Message.info('点击了昨天');
+								}
+							},
+							{
+								text: '一周前33',
+								value() {
+									const date = new Date();
+									date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+									return date;
+								},
+								onClick: (picker) => {
+									picker.$Message.info('点击了一周前');
+								}
+							}
+						],
+						disabledDate(date) {
+							return date && date.valueOf() < Date.now() - 86400000;
+						}
+					},
+					options2: {
+						shortcuts: [{
+								text: '最近一周',
+								value() {
+									const end = new Date();
+									const start = new Date();
+									start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+									return [start, end];
+								}
+							},
+							{
+								text: '最近一个月',
+								value() {
+									const end = new Date();
+									const start = new Date();
+									start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+									return [start, end];
+								}
+							},
+							{
+								text: '最近三个月',
+								value() {
+									const end = new Date();
+									const start = new Date();
+									start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+									return [start, end];
+								}
+							}
+						],
+						disabledDate(date) {
+							const disabledDay = date.getDate();
+							return disabledDay === 15;
+						}
+					},
+					cityList: [{
+							value: 'beijing',
+							label: '北京市'
+						},
+						{
+							value: 'shanghai',
+							label: '上海市'
+						},
+						{
+							value: 'shenzhen',
+							label: '深圳市'
+						},
+						{
+							value: 'hangzhou',
+							label: '杭州市'
+						},
+						{
+							value: 'nanjing',
+							label: '南京市'
+						},
+						{
+							value: 'chongqing',
+							label: '重庆市'
+						}
+					],
+					model10: []
+				}
+			})
+		</script>
+	</body>
+
+</html>
