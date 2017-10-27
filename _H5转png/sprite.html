@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>精灵图合成</title>
+		<style type="text/css">
+			html,
+			body {
+				height: 100%;
+			}
+			
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				background: #fff;
+			}
+			
+			#box {
+				display: inline-block;
+				overflow: hidden;
+				border: 1px solid #666666;
+			}
+			
+			#box div {
+				width: 50px;
+				height: 50px;
+				background-repeat: no-repeat;
+			}
+			
+			#box .level {
+				float: left;
+			}
+			
+			#box .vertical {
+				float: none;
+			}
+		</style>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/html2canvas/0.4.1/html2canvas.min.js"></script>
+	</head>
+
+	<body>
+		<div>
+			<input id="fileImage" type="file" multiple="multiple">
+			<input type="button" id="vertical" value="垂直对齐" />
+			<input type="button" id="level" value="水平对齐" />
+			<input type="button" id="center" value="单图居中对齐" />
+			<label>单个图宽:<input id="widthv" type="number" value="50"/>px</label>
+			<label>单个图高:<input id="heightv" type="number" value="50"/>px</label>
+			<input type="button" id="download" value="  下载   " />
+		</div>
+		<div id="box"></div>
+	</body>
+	<script type="text/javascript">
+		fileImage.onclick = fileClick;
+		$('#fileImage').click(function() {
+			fileClick.bind(this)();
+		});
+
+		$('#fileImage').change(function() {
+			fileChange.bind(this)();
+			setTimeout(function() {
+				console.log(fileData.filesA);
+				var filesA = fileData.filesA;
+				if(filesA.length) {
+					for(var i = 0, len = filesA.length; i < len; i++) {
+						var $div = $('<div style="background-image: url(' + filesA[i]['base64'] + ');">')
+						$('#box').append($div);
+					}
+				}
+			}, 1000);
+		});
+
+		$('#vertical').click(function() {
+			$('#box div').attr('class', 'vertical');
+		});
+
+		$('#level').click(function() {
+			$('#box div').attr('class', 'level');
+		});
+
+		$('#center').click(function() {
+			$('#box div').css('background-position', 'center');
+		});
+
+		$('#widthv').on('input', function() {
+			$('#box div').css('width', $(this).val());
+		});
+
+		$('#heightv').on('input', function() {
+			$('#box div').css('height', $(this).val());
+		});
+
+		$('#download').click(function() {
+			$('#box').css('border', 'none');
+			html2canvas($("#box"), {
+				onrendered: function(canvas) {
+					var url = canvas.toDataURL();
+					/**/
+					var img = document.createElement("img");
+					img.src = url;
+					img.onload = function() {
+						var canvas2 = document.createElement("canvas");
+						canvas2.width = (canvas.width) * 2;
+						canvas2.height = (canvas.height) * 2;
+						var ctx2 = canvas2.getContext("2d");
+						ctx2.drawImage(img, 0, 0, canvas2.width, canvas2.height);
+						url = canvas2.toDataURL();
+						//以下代码为下载此图片功能
+						var triggerDownload = $("<a>").attr("href", url).attr("download", "sprite.png").appendTo("body");
+						triggerDownload[0].click();
+						triggerDownload.remove();
+					};
+					/**/
+					$('#box').css('border', '');
+				}
+			});
+
+		});
+
+		var fileData = {
+			filesA: [],
+			filesALen: 50,
+			filesSize: 5 * 1024 * 1024,
+			filesType: ["image/png", "image/jpeg"]
+		};
+
+		//清除上传val
+		function fileClick() {
+			this.value = null;
+		};
+		//上传预览
+		function fileChange() {
+			//console.log(this.value)
+			var _this = this;
+			var v_this = fileData;
+			preview(_this, function(fall) {
+				for(var i = 0; i < fall.length; i++) {
+					if((fall[i].file.size <= v_this.filesSize) && (fall[i].file.type == v_this.filesType[0] || fall[i].file.type == v_this.filesType[1]) && (v_this.filesA.length < v_this.filesALen)) {
+						v_this.filesA.push(fall[i]);
+					} else {
+						if(!(fall[i].file.size <= v_this.filesSize)) {
+							alert('文件大于5M');
+						}
+						if(!(fall[i].file.type == v_this.filesType[0] || fall[i].file.type == v_this.filesType[1])) {
+							alert('图片格式不对');
+						}
+						if(!(v_this.filesA.length < v_this.filesALen)) {
+							alert('图片多于五张');
+						}
+					}
+				};
+				fall = null; //手动释放内存
+			});
+			//console.log(fileData)
+		};
+		//上传预览关联函数
+		function preview(file, fn, fnIE) {
+			var readerAll, filesAll;
+			if(file.files && file.files[0]) {
+				readerAll = new Array;
+				filesAll = new Array;
+				for(var i = 0; i < file.files.length; i++) {
+					(function() {
+						var i_i = i;
+						readerAll[i] = new FileReader();
+						filesAll[i] = new Object;
+						filesAll[i]['file'] = file.files[i];
+						readerAll[i].readAsDataURL(file.files[i]);
+						readerAll[i].onload = function(evt) {
+							if(filesAll[i_i]['file']['type'].indexOf('image/') != -1) {
+								filesAll[i_i]['base64'] = evt.target.result;
+							} else {
+								filesAll[i_i]['base64'] = '';
+							};
+							if(i_i + 1 == file.files.length) {
+								readerAll = null;
+								if(fn) {
+									fn(filesAll);
+								}
+								filesAll = null;
+							}
+						}
+					})();
+				}
+			} else {
+				if(fnIE) {
+					fnIE(file)
+				} else {
+					alert('你的IE浏览器版本低,不支持本地预览');
+				}
+			}
+		};
+	</script>
+
+</html>
