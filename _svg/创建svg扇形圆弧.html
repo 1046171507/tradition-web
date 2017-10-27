@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<svg id="svg_1" xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="800">
+			<!--<path class="path_8" d="M0,0 ax轴半径,y轴半径(当实际椭圆大于这个值时表现为比例) 椭圆与x轴夹角(当绘制的是椭圆且有效,) 大圆还是小圆,顺时针还是逆时针 终点X,终点Y"/>-->
+			<path d="m0,200 l100,100 a50,50 0 0 0 100,0 l100,-100" fill='none' stroke='purple' />
+		</svg>
+		<script type="text/javascript">
+			//svg创建元素类型 createSvg("svgDom");
+			var createSvg = function(svgD) {
+				return document.createElementNS("http://www.w3.org/2000/svg", svgD);
+			};
+
+			$(function() {
+				var arcFn = function(centerCircle, r, originDeg, endDeg, clockwise) {
+					var x1, y1, x2, y2, cw, size;
+					x1 = centerCircle[0] + r * Math.cos(originDeg);
+					y1 = centerCircle[1] + r * Math.sin(originDeg);
+					x2 = centerCircle[0] + r * Math.cos(endDeg);
+					y2 = centerCircle[1] + r * Math.sin(endDeg);
+					if(clockwise == false || clockwise == 0) {
+						cw = 0;
+					} else {
+						cw = 1;
+					}
+					if(cw) {
+						if(endDeg - originDeg > Math.PI) {
+							size = 1;
+						} else {
+							size = 0;
+						}
+					} else {
+						if(originDeg - endDeg > Math.PI) {
+							size = 1;
+						} else {
+							size = 0;
+						}
+					}
+					/*return "M" + x1 + ',' + y1 + " A" + r + ',' + r + ' 0 ' + size + ' ' + cw + ' ' + x2 + ',' + y2;*/
+					return x1 + ',' + y1 + " a" + r + ',' + r + ' 0 ' + size + ' ' + cw + ' ' + (x2 - x1) + ',' + (y2 - y1);
+				}
+				var sectorFn = function(centerCircle, r, originDeg, endDeg, clockwise) {
+					var x1, y1, x2, y2, cw, size;
+					x1 = centerCircle[0] + r * Math.cos(originDeg);
+					y1 = centerCircle[1] + r * Math.sin(originDeg);
+					x2 = centerCircle[0] + r * Math.cos(endDeg);
+					y2 = centerCircle[1] + r * Math.sin(endDeg);
+					if(clockwise == false || clockwise == 0) {
+						cw = 0;
+					} else {
+						cw = 1;
+					}
+					if(cw) {
+						if(endDeg - originDeg > Math.PI) {
+							size = 1;
+						} else {
+							size = 0;
+						}
+					} else {
+						if(originDeg - endDeg > Math.PI) {
+							size = 1;
+						} else {
+							size = 0;
+						}
+					}
+					return "M" + centerCircle[0] + ',' + centerCircle[1] + " L" + x1 + ',' + y1 + " A" + r + ',' + r + ' 0 ' + size + ' ' + cw + ' ' + x2 + ',' + y2 + 'Z';
+				}
+				////
+				var nodePath1 = createSvg("path");
+				var arcPath = arcFn([100, 100], 50, 0, 0, 0);
+				var $path1 = $(nodePath1).attr({
+					"d": 'm' + arcPath
+				}).css({
+					'fill': 'yellow',
+					'stroke': 'purple',
+					'stroke-width': 2
+				});
+				$('#svg_1').append($path1);
+				var endDeg1 = 0;
+				setInterval(function() {
+					endDeg1 = (endDeg1 - 0.02) % (Math.PI * 2);
+					arcPath = arcFn([100, 100], 50, 0, endDeg1, 0);
+					$path1.attr("d", "m" + arcPath);
+				}, 30);
+
+				var nodePath2 = createSvg("path");
+				var sectorPath = sectorFn([200, 100], 50, 0, 0, 1);
+				var $path2 = $(nodePath2).attr({
+					"d": sectorPath
+				}).css({
+					'fill': 'none',
+					'stroke': 'purple',
+					'stroke-width': 2
+				});;
+				$('#svg_1').append($path2);
+				var endDeg2 = 0;
+				setInterval(function() {
+					endDeg2 = (endDeg2 + 0.02) % (Math.PI * 2);
+					sectorPath = sectorFn([200, 100], 50, 0, endDeg2);
+					$path2.attr("d", sectorPath);
+				}, 30);
+
+			});
+		</script>
+	</body>
+
+</html>

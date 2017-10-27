@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		IE不支持style及外部css!!!
+		<svg width="240" height="240" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 985 620">
+			<g id="g1">
+				<circle id="backdrop" />
+				<circle id="progress" />
+			</g>
+		</svg>
+		<style type="text/css">
+			
+			#backdrop {
+				r: 90px;
+				cy: 120px;
+				cx: 120px;
+				stroke-width: 3px;
+				stroke: rgb(51, 51, 51);
+				fill: none;
+			}
+			
+			#progress {
+				r: 90px;
+				cy: 120px;
+				cx: 120px;
+				stroke-width: 20px;
+				stroke: #896ED5;
+				fill: none;
+				stroke-linecap: round;
+				stroke-dasharray: 754px;
+				stroke-dashoffset: 754px;
+				animation: progressAnimation 2400ms linear infinite;
+				transform-origin: 50% 50%;
+				transform: rotate(-90deg);
+			}
+			
+			@keyframes progressAnimation {
+				from {
+					stroke-dashoffset: 754px;
+				}
+				to {
+					stroke-dashoffset: 0px;
+				}
+			}
+		</style>
+	</body>
+
+</html>
