@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../public-css/mbase.css"/>
+		<script src="../public-js/jquery-2.0.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="echarts-zrender.min.js"></script>
+	</head>
+
+	<body>
+		<div id="mian-1" style="width: 800px; height: 800px;"></div>
+		<script type="text/javascript">
+			$(function() {
+				// 基于准备好的dom，初始化echarts实例
+				var mian = document.getElementById('mian-1');
+				var myChart = echarts.init(mian);
+
+				option = {
+					graphic: [{
+							type: 'image',
+							id: 'logo',
+							right: 20,
+							top: 20,
+							z: -10,
+							bounding: 'raw',
+							origin: [75, 75],
+							style: {
+								image: 'http://echarts.baidu.com/images/favicon.png',
+								width: 150,
+								height: 150,
+								opacity: 0.4
+							},
+							scale: [1.2, 1.2],
+						},
+						{
+							type: 'bezierCurve',
+							id: 'curve',
+							left: 20,
+							top: 20,
+							z: -10,
+							//bounding: 'raw',
+							//origin: [100, 100],
+							shape: {
+								x1: 0,
+								y1: 0,
+								cpx1: 100,
+								cpy1: 0,
+								cpx2: 100,
+								cpy2: 200,
+								x2: 200,
+								y2: 200,
+							},
+							style: {
+								stroke: '#f00',
+								lineWidth: 10,
+								opacity: 0.5,
+							},
+							rotation: Math.PI / 4,
+							scale: [1.2, 1.2],
+							//position:[200,200],设置left,top等,position不再生效
+							draggable: true,
+							ondragend: function(e) {
+								console.log(e)
+							}
+						},
+						{
+							type: 'rect',
+							left: 'center',
+							top: 'center',
+							z: 100,
+							shape: {
+								width: 100,
+								height: 50
+							},
+							style: {
+								stroke: '#f00',
+								lineWidth: 10,
+								fill: 'rgba(0,0,0,1)'
+							}
+						},
+						{
+							type: 'group',
+							//rotation: Math.PI / 4,
+							bounding: 'raw',
+							right: 400,
+							bottom: 300,
+							z: 100,
+							children: [{
+									type: 'rect',
+									left: '50%',
+									top: 'center',
+									z: 100,
+									shape: {
+										width: 400,
+										height: 50
+									},
+									style: {
+										fill: 'rgba(0,0,0,0.3)'
+									}
+								},
+								{
+									type: 'text',
+									left: 'center',
+									top: 'center',
+									z: 100,
+									draggable: true,
+									style: {
+										fill: '#f00',
+										text: 'ECHARTS BAR CHART',
+										font: 'bold 26px Microsoft YaHei'
+									}
+								}
+							]
+						},
+						{
+							type: 'group',
+							left: '10%',
+							top: 'center',
+							children: [{
+									type: 'rect',
+									z: 100,
+									left: 'center',
+									top: 'middle',
+									shape: {
+										width: 190,
+										height: 90
+									},
+									style: {
+										fill: '#fff',
+										stroke: '#555',
+										lineWidth: 2,
+										shadowBlur: 8,
+										shadowOffsetX: 3,
+										shadowOffsetY: 3,
+										shadowColor: 'rgba(0,0,0,0.3)'
+									}
+								},
+								{
+									type: 'text',
+									z: 100,
+									left: 'center',
+									top: 'middle',
+									style: {
+										fill: '#333',
+										text: [
+											'横轴表示温度，单位是°C',
+											'纵轴表示高度，单位是km',
+											'右上角有一个图片做的水印',
+											'这个文本块可以放在图中各',
+											'种位置'
+										].join('\n'),
+										font: '14px Microsoft YaHei'
+									}
+								}
+							]
+						}
+					]
+				};
+
+				var rotation = 0;
+				setInterval(function() {
+					myChart.setOption({
+						graphic: {
+							id: 'logo',
+							rotation: (rotation += Math.PI / 360) % (Math.PI * 2)
+						}
+					});
+				}, 30);
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+
+			});
+		</script>
+		<div id="mian-2" style="width: 800px; height: 800px; border: 1px solid #000000;"></div>
+		<script type="text/javascript">
+			$(function() {
+				// 基于准备好的dom，初始化echarts实例
+				var mian = document.getElementById('mian-2');
+				var myChart = echarts.init(mian);
+				var r = 250;
+				option = {
+					graphic: {
+						type: 'group',
+						id: 'group',
+						left: 'center',
+						top: 'center',
+						z: 1,
+						bounding: 'raw',
+						children: []
+					}
+				};
+
+				var nodes = [{
+					"name": "1",
+					"id": "1",
+					"valueTo": 40,
+					"valueOn": 60,
+					"color": "rgba(0,0,0,0.4)",
+					"hoverColor": "#ff0"
+				}, {
+					"name": "2",
+					"id": "2",
+					"valueTo": 40,
+					"valueOn": 60,
+					"color": "#ccc",
+					"hoverColor": "#ff0"
+				}, {
+					"name": "3",
+					"id": "3",
+					"valueTo": 40,
+					"valueOn": 60,
+					"color": "#ccc",
+					"hoverColor": "#ff0"
+				}, {
+					"name": "4",
+					"id": "4",
+					"valueTo": 40,
+					"valueOn": 60,
+					"color": "#ccc",
+					"hoverColor": "#ff0"
+				}, {
+					"name": "5",
+					"id": "5",
+					"valueTo": 40,
+					"valueOn": 60,
+					"color": "#ccc",
+					"hoverColor": "#ff0"
+				}];
+				var links = [{
+					"id": "1",
+					"name": null,
+					"source": "1",
+					"target": "2",
+					"value": 6,
+					"color": "rgba(0,0,0,0.1)",
+					"hoverColor": "#ff0",
+					"rHoverColor": "#ff0"
+				}, {
+					"id": "2",
+					"name": null,
+					"source": "2",
+					"target": "3",
+					"value": 10,
+					"color": "#ccc",
+					"hoverColor": "#ff0",
+					"rHoverColor": "#ff0"
+				}, {
+					"id": "3",
+					"name": null,
+					"source": "3",
+					"target": "4",
+					"value": 10,
+					"color": "#ccc",
+					"hoverColor": "#ff0",
+					"rHoverColor": "#ff0"
+				}, {
+					"id": "4",
+					"name": null,
+					"source": "4",
+					"target": "5",
+					"value": 10,
+					"color": "#ccc",
+					"hoverColor": "#ff0",
+					"rHoverColor": "#ff0"
+				}, {
+					"id": "5",
+					"name": null,
+					"source": "5",
+					"target": "1",
+					"value": 10,
+					"color": "#ccc",
+					"hoverColor": "#ff0",
+					"rHoverColor": "#ff0"
+				}, {
+					"id": "6",
+					"name": null,
+					"source": "1",
+					"target": "3",
+					"value": 10,
+					"color": "#ccc",
+					"hoverColor": "#ff0",
+					"rHoverColor": "#ff0"
+				}, {
+					"id": "7",
+					"name": null,
+					"source": "1",
+					"target": "4",
+					"value": 10,
+					"color": "#ccc",
+					"hoverColor": "#ff0",
+					"rHoverColor": "#ff0"
+				}, {
+					"id": "8",
+					"name": null,
+					"source": "1",
+					"target": "5",
+					"value": 10,
+					"color": "#ccc",
+					"hoverColor": "#ff0",
+					"rHoverColor": "#ff0"
+				}, {
+					"id": "9",
+					"name": null,
+					"source": "2",
+					"target": "4",
+					"value": 10,
+					"color": "#ccc",
+					"hoverColor": "#ff0",
+					"rHoverColor": "#ff0"
+				}, {
+					"id": "10",
+					"name": null,
+					"source": "1",
+					"target": "3",
+					"value": 10,
+					"color": "#ccc",
+					"hoverColor": "#ff0",
+					"rHoverColor": "#ff0"
+				}];
+				var _rect,
+					thickness = 20,
+					len = nodes.length,
+					ogniDeg = Math.PI * 2 / len;
+
+				for(var i = 0; i < len; i++) {
+					var _deg = Math.PI / 2 + ogniDeg * i,
+						_r = r - thickness * 0.5,
+						_x = Math.ceil(_r * Math.cos(_deg)),
+						_y = -Math.ceil(_r * Math.sin(_deg));
+					nodes[i]["x"] = _x;
+					nodes[i]["y"] = _y;
+					nodes[i]["angle"] = _deg;
+					nodes[i]["w"] = 1;
+					nodes[i]["tw"] = 1;
+					_rectTo = {
+						_id: "rectTo" + nodes[i]["id"],
+						name: nodes[i]["name"],
+						value: nodes[i]["valueTo"],
+						type: 'rect',
+						rotation: -ogniDeg * i + Math.PI,
+						origin: [-_x, _y],
+						z: 10,
+						shape: {
+							width: nodes[i]["valueTo"],
+							height: thickness,
+							x: -_x,
+							y: _y - thickness * 0.5,
+						},
+						color: nodes[i]["color"],
+						hoverColor: nodes[i]["hoverColor"],
+						style: {
+							fill: nodes[i]["color"],
+						},
+						onmouseover: function(e) {
+							var _this = option.graphic.children[e.target._index];
+							for(var i = 0, len = option.graphic.children.length; i < len; i++) {
+								var _curve = option.graphic.children[i];
+								if(_curve["source"] == _this["name"]) {
+									_curve.style.stroke = _curve.rHoverColor;
+								}
+							}
+							myChart.setOption(option);
+						},
+						onmouseout: function(e) {
+							var _this = option.graphic.children[e.target._index];
+							for(var i = 0, len = option.graphic.children.length; i < len; i++) {
+								var _curve = option.graphic.children[i];
+								if(_curve["source"] == _this["name"]) {
+									_curve.style.stroke = _curve.color;
+								}
+							}
+							myChart.setOption(option);
+						}
+					};
+					_rectTo._index = option.graphic.children.length;
+					option.graphic.children.push(_rectTo);
+					_rectOn = {
+						_id: "rectOn" + nodes[i]["id"],
+						name: nodes[i]["name"],
+						value: nodes[i]["valueOn"],
+						type: 'rect',
+						rotation: -ogniDeg * i + Math.PI,
+						origin: [-_x, _y],
+						z: 10,
+						shape: {
+							width: nodes[i]["valueOn"],
+							height: thickness,
+							x: -_x - nodes[i]["valueOn"],
+							y: _y - thickness * 0.5,
+						},
+						color: nodes[i]["color"],
+						hoverColor: nodes[i]["hoverColor"],
+						style: {
+							fill: nodes[i]["color"]
+						},
+						onmouseover: function(e) {
+							var _this = option.graphic.children[e.target._index];
+							for(var i = 0, len = option.graphic.children.length; i < len; i++) {
+								var _curve = option.graphic.children[i];
+								if(_curve["target"] == _this["name"]) {
+									_curve.style.stroke = _curve.rHoverColor;
+								}
+							}
+							myChart.setOption(option);
+						},
+						onmouseout: function(e) {
+							var _this = option.graphic.children[e.target._index];
+							for(var i = 0, len = option.graphic.children.length; i < len; i++) {
+								var _curve = option.graphic.children[i];
+								if(_curve["target"] == _this["name"]) {
+									_curve.style.stroke = _curve.color;
+								}
+							}
+							myChart.setOption(option);
+						}
+					};
+					_rectOn._index = option.graphic.children.length;
+					option.graphic.children.push(_rectOn);
+				};
+				//此处准备画曲线
+				var curve = [],
+					q = 0.6;
+				for(var i = 0, len = links.length; i < len; i++) {
+					var _curve = links[i];
+					for(var j = 0, _len = nodes.length; j < _len; j++) {
+						if(links[i]["source"] == nodes[j]["name"]) {
+							var _link = links[i],
+								_node = nodes[j],
+								w = _node["w"] + _link["value"] * 0.5;
+							nodes[j]["w"] += _link["value"];
+							_curve._source = {
+								"x": -_node["x"] - w * Math.sin(_node["angle"]),
+								"y": _node["y"] + w * Math.cos(_node["angle"]),
+								"angle": _node["angle"],
+								"x1": -_node["x"] * (1 - q) - w * Math.cos(_node["angle"]),
+								"y1": _node["y"] * (1 - q) + w * Math.sin(_node["angle"])
+							}
+						};
+						if(links[i]["target"] == nodes[j]["name"]) {
+							var _link = links[i],
+								_node = nodes[j],
+								tw = _node["tw"] + _link["value"] * 0.5;
+							nodes[j]["tw"] += _link["value"];
+							_curve._target = {
+								"x": -_node["x"] + tw * Math.sin(_node["angle"]),
+								"y": _node["y"] - tw * Math.cos(_node["angle"]),
+								"angle": nodes[j]["angle"],
+								"x1": -nodes[j]["x"] * (1 - q) + tw * Math.cos(nodes[j]["angle"]),
+								"y1": nodes[j]["y"] * (1 - q) - tw * Math.sin(nodes[j]["angle"])
+							}
+						}
+					};
+					curve.push(_curve);
+					/**/
+					var _bezierCurve = {
+						type: 'bezierCurve',
+						id: "curve" + _curve["id"],
+						source: _curve["source"],
+						target: _curve["target"],
+						shape: {
+							x1: _curve["_source"]["x"],
+							y1: _curve["_source"]["y"],
+							cpx1: _curve["_source"]["x1"],
+							cpy1: _curve["_source"]["y1"],
+							cpx2: _curve["_target"]["x1"],
+							cpy2: _curve["_target"]["y1"],
+							x2: _curve["_target"]["x"],
+							y2: _curve["_target"]["y"],
+						},
+						color: _curve["color"],
+						rHoverColor: _curve["rHoverColor"],
+						hoverColor: _curve["hoverColor"],
+						style: {
+							stroke: _curve["color"],
+							lineWidth: _curve["value"],
+							opacity: 0.4,
+						},
+						onmouseover: function(e) {
+							var _this = option.graphic.children[e.target._index];
+							_this.style.stroke = _this.hoverColor;
+							myChart.setOption(option);
+						},
+						onmouseout: function(e) {
+							var _this = option.graphic.children[e.target._index];
+							_this.style.stroke = _this.color;
+							myChart.setOption(option);
+						}
+					};
+					_bezierCurve._index = option.graphic.children.length;
+					option.graphic.children.push(_bezierCurve);
+					/**/
+
+				};
+
+				console.log(curve);
+				console.log(nodes);
+
+				var rotation = 0;
+				//setInterval(function() {
+				//	myChart.setOption({
+				//		graphic: {
+				//			id: 'logo',
+				//			rotation: (rotation += Math.PI / 360) % (Math.PI * 2)
+				//		}
+				//	});
+				//}, 30);
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+			});
+		</script>
+
+	</body>
+
+</html>
