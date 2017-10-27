@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/vue/2.3.1/vue.min.js"></script>
+		<script src="../js/vue-tpl.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="box">
+		</div>
+		<div class="box" vue-data='list'>
+			<p>{{list.a}}</p>
+			<p v-for="value in list.b">{{value}}</p>
+			<p v-for="(value, key) in list.b">{{key}}:{{value}}</p>
+			<p v-for="value in list.c">{{value}}</p>
+			<p v-for="(value,i) in list.c">{{i}}:{{value}}</p>
+			<p id="d-show">点击显示list>d>d1:<span v-if="list.d && list.d.show" style="color: red;">{{list.d.d1}}</span></p>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		$(function() {
+			$('.box').vueData({
+				a: 1,
+				b: {
+					b1: 21,
+					b2: 22,
+					b3: 23
+				},
+				c: [31, 32, 33],
+				d: {
+					show: false,
+					d1: 444444
+				}
+			});
+
+			$('#d-show').click(function() {
+				$('.box').vueData('list.d.show', true);
+			});
+			/*//后添加模板引擎初始化
+			window.vueInit()*/
+		});
+	</script>
+
+</html>
