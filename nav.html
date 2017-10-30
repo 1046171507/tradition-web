@@ -1,68 +1,78 @@
-<meta charset="UTF-8">
-<script src="https://1046171507.github.io/tradition-web/js/jquery.min.js"></script>
-<import href="link-script.html#head-content"></import>
-<div class="nav left MScroll" id="nav" style="overflow-y: scroll;">
-	<p>整套Demo组件都是采用的同步加载(阻塞加载),没用require.js等异步按需加载。虽然影响性能,但是程序更加简洁,切便于生产环境批量替换(组件替换到组件引入处即可)</p>
-	<!--原生模拟扩展开始-->
-	<a class="nav-h">原生模拟扩展(UI组件)</a>
-	<div>
-		<a id="a-1" href="_ui组件/自定义优化.html" target="demoframe"><span>自定义优化</span></a>
-		<a href="_ui组件/单复选框.html" target="demoframe">单复选框</a>
-		<a href="_ui组件/模拟下拉框.html" target="demoframe">模拟下拉框</a>
-		<a href="_ui组件/模拟数字输入框.html" target="demoframe">模拟数字输入框</a>
-		<a href="_ui组件/模拟滑动输入.html" target="demoframe">模拟滑动输入</a>
-		<a href="_ui组件/模拟滚动条.html" target="demoframe">模拟滚动条</a>
-		<a href="_ui组件/模拟表格.html" target="demoframe">模拟表格</a>
-		<a href="_ui组件/模拟颜色选择.html" target="demoframe">模拟颜色选择</a>
-		<a href="_ui组件/分页.html" target="demoframe">分页</a>
-	</div>
-	<!--原生模拟扩展结束-->
-	<!--方法-插件开始-->
-	<a class="nav-h">方法-插件</a>
-	<div>
-		<a href="_方法-插件/$(dom).Ev(fn(ev)).html" target="demoframe">$(dom).Ev(fn(ev))</a>
-		<a href="_方法-插件/$(dom).fn(v).html" target="demoframe">$(dom).fn(v)</a>
-		<a href="_方法-插件/$.fn(v).html" target="demoframe">$.fn(v)</a>
-		<a href="_方法-插件/canvas滤镜.html" target="demoframe">canvas滤镜</a>
-		<a href="_方法-插件/canvas黑白滤镜.html" target="demoframe">canvas黑白滤镜</a>
-		<a href="_方法-插件/cookie.html" target="demoframe">cookie</a>
-		<a href="_方法-插件/关联提示语.html" target="demoframe">关联提示语</a>
-		<a href="_方法-插件/动态更新style.html" target="demoframe">动态更新style</a>
-		<a href="_方法-插件/动画结束函数.html" target="demoframe">动画结束函数</a>
-		<a href="_方法-插件/图片上传与预览.html" target="demoframe">图片上传与预览</a>
-		<a href="_方法-插件/字体渐变.html" target="demoframe">字体渐变</a>
-		<a href="_方法-插件/对象数组字符串转换.html" target="demoframe">对象数组字符串转换</a>
-		<a href="_方法-插件/弹窗.html" target="demoframe">弹窗</a>
-		<a href="_方法-插件/排序.html" target="demoframe">排序</a>
-		<a href="_方法-插件/本地存储.html" target="demoframe">本地存储</a>
-		<a href="_方法-插件/模板引擎.html" target="demoframe">模板引擎</a>
-		<a href="_方法-插件/正则插件.html" target="demoframe">正则插件</a>
-		<a href="_方法-插件/百度分享.html" target="demoframe">百度分享</a>
-		<a href="_方法-插件/自由日历-农历.html" target="demoframe">自由日历-农历</a>
-		<a href="_方法-插件/自由日历.html" target="demoframe">自由日历</a>
-		<a href="_方法-插件/获取节点IE8.html" target="demoframe">获取节点IE8+</a>
-		<a href="_方法-插件/转64位.html" target="demoframe">转64位</a>
-		<a href="_方法-插件/运动曲线.html" target="demoframe">运动曲线</a>
-		<a href="_方法-插件/面向对象.html" target="demoframe">面向对象</a>
-	</div>
-	<!--方法-插件结束-->
-	<!--鼠标键盘扩展开始-->
-	<a class="nav-h">鼠标键盘扩展</a>
-	<div>
-		<a href="_鼠标键盘事件扩展/demo_touch.html" target="demoframe">touch</a>
-		<a href="_鼠标键盘事件扩展/demo_val改变.html" target="demoframe">val改变</a>
-		<a href="_鼠标键盘事件扩展/demo_原生拖拽.html" target="demoframe">原生拖拽</a>
-		<a href="_鼠标键盘事件扩展/demo_快捷键.html" target="demoframe">快捷键</a>
-		<a href="_鼠标键盘事件扩展/demo_拖拽.html" target="demoframe">拖拽</a>
-		<a href="_鼠标键盘事件扩展/demo_滚轮.html" target="demoframe">滚轮</a>
-		<a href="_鼠标键盘事件扩展/demo_阻止提交.html" target="demoframe">阻止提交</a>
-		<a href="_鼠标键盘事件扩展/demo_鼠标右键菜单.html" target="demoframe">鼠标右键菜单</a>
-		<a href="_鼠标键盘事件扩展/demo_鼠标框选.html" target="demoframe">鼠标框选</a>
-		<a href="_鼠标键盘事件扩展/demo_鼠标框选-求和.html" target="demoframe">鼠标框选-求和</a>
-	</div>
-	<!--鼠标键盘扩展结束-->
-	<!--Vue客户端加载组件开始-->
-	<a class="nav-h" href="_vue-客户端组件式开发/客户端加载组件.html" target="demoframe">Vue客户端加载组件</a>
-	<!--Vue客户端加载组件结束-->
-	<script src="js/app/nav.js" type="text/javascript" charset="utf-8"></script>
-</div>
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<script src="https://1046171507.github.io/tradition-web/js/jquery.min.js"></script>
+		<import href="link-script.html"></import>
+	</head>
+
+	<body style="display: none;">
+		<div class="nav left MScroll" id="nav" style="overflow-y: scroll;">
+			<p>整套Demo组件都是采用的同步加载(阻塞加载),没用require.js等异步按需加载。虽然影响性能,但是程序更加简洁,切便于生产环境批量替换(组件替换到组件引入处即可)</p>
+			<!--原生模拟扩展开始-->
+			<a class="nav-h">原生模拟扩展(UI组件)</a>
+			<div>
+				<a id="a-1" href="_ui组件/自定义优化.html" target="demoframe"><span>自定义优化</span></a>
+				<a href="_ui组件/单复选框.html" target="demoframe">单复选框</a>
+				<a href="_ui组件/模拟下拉框.html" target="demoframe">模拟下拉框</a>
+				<a href="_ui组件/模拟数字输入框.html" target="demoframe">模拟数字输入框</a>
+				<a href="_ui组件/模拟滑动输入.html" target="demoframe">模拟滑动输入</a>
+				<a href="_ui组件/模拟滚动条.html" target="demoframe">模拟滚动条</a>
+				<a href="_ui组件/模拟表格.html" target="demoframe">模拟表格</a>
+				<a href="_ui组件/模拟颜色选择.html" target="demoframe">模拟颜色选择</a>
+				<a href="_ui组件/分页.html" target="demoframe">分页</a>
+			</div>
+			<!--原生模拟扩展结束-->
+			<!--方法-插件开始-->
+			<a class="nav-h">方法-插件</a>
+			<div>
+				<a href="_方法-插件/$(dom).Ev(fn(ev)).html" target="demoframe">$(dom).Ev(fn(ev))</a>
+				<a href="_方法-插件/$(dom).fn(v).html" target="demoframe">$(dom).fn(v)</a>
+				<a href="_方法-插件/$.fn(v).html" target="demoframe">$.fn(v)</a>
+				<a href="_方法-插件/canvas滤镜.html" target="demoframe">canvas滤镜</a>
+				<a href="_方法-插件/canvas黑白滤镜.html" target="demoframe">canvas黑白滤镜</a>
+				<a href="_方法-插件/cookie.html" target="demoframe">cookie</a>
+				<a href="_方法-插件/关联提示语.html" target="demoframe">关联提示语</a>
+				<a href="_方法-插件/动态更新style.html" target="demoframe">动态更新style</a>
+				<a href="_方法-插件/动画结束函数.html" target="demoframe">动画结束函数</a>
+				<a href="_方法-插件/图片上传与预览.html" target="demoframe">图片上传与预览</a>
+				<a href="_方法-插件/字体渐变.html" target="demoframe">字体渐变</a>
+				<a href="_方法-插件/对象数组字符串转换.html" target="demoframe">对象数组字符串转换</a>
+				<a href="_方法-插件/弹窗.html" target="demoframe">弹窗</a>
+				<a href="_方法-插件/排序.html" target="demoframe">排序</a>
+				<a href="_方法-插件/本地存储.html" target="demoframe">本地存储</a>
+				<a href="_方法-插件/模板引擎.html" target="demoframe">模板引擎</a>
+				<a href="_方法-插件/正则插件.html" target="demoframe">正则插件</a>
+				<a href="_方法-插件/百度分享.html" target="demoframe">百度分享</a>
+				<a href="_方法-插件/自由日历-农历.html" target="demoframe">自由日历-农历</a>
+				<a href="_方法-插件/自由日历.html" target="demoframe">自由日历</a>
+				<a href="_方法-插件/获取节点IE8.html" target="demoframe">获取节点IE8+</a>
+				<a href="_方法-插件/转64位.html" target="demoframe">转64位</a>
+				<a href="_方法-插件/运动曲线.html" target="demoframe">运动曲线</a>
+				<a href="_方法-插件/面向对象.html" target="demoframe">面向对象</a>
+			</div>
+			<!--方法-插件结束-->
+			<!--鼠标键盘扩展开始-->
+			<a class="nav-h">鼠标键盘扩展</a>
+			<div>
+				<a href="_鼠标键盘事件扩展/demo_touch.html" target="demoframe">touch</a>
+				<a href="_鼠标键盘事件扩展/demo_val改变.html" target="demoframe">val改变</a>
+				<a href="_鼠标键盘事件扩展/demo_原生拖拽.html" target="demoframe">原生拖拽</a>
+				<a href="_鼠标键盘事件扩展/demo_快捷键.html" target="demoframe">快捷键</a>
+				<a href="_鼠标键盘事件扩展/demo_拖拽.html" target="demoframe">拖拽</a>
+				<a href="_鼠标键盘事件扩展/demo_滚轮.html" target="demoframe">滚轮</a>
+				<a href="_鼠标键盘事件扩展/demo_阻止提交.html" target="demoframe">阻止提交</a>
+				<a href="_鼠标键盘事件扩展/demo_鼠标右键菜单.html" target="demoframe">鼠标右键菜单</a>
+				<a href="_鼠标键盘事件扩展/demo_鼠标框选.html" target="demoframe">鼠标框选</a>
+				<a href="_鼠标键盘事件扩展/demo_鼠标框选-求和.html" target="demoframe">鼠标框选-求和</a>
+			</div>
+			<!--鼠标键盘扩展结束-->
+			<!--Vue客户端加载组件开始-->
+			<a class="nav-h" href="_vue-客户端组件式开发/客户端加载组件.html" target="demoframe">Vue客户端加载组件</a>
+			<!--Vue客户端加载组件结束-->
+			<script src="js/app/nav.js" type="text/javascript" charset="utf-8"></script>
+		</div>
+	</body>
+
+</html>

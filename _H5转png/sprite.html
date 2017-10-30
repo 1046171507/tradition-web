@@ -100,22 +100,10 @@
 			html2canvas($("#box"), {
 				onrendered: function(canvas) {
 					var url = canvas.toDataURL();
-					/**/
-					var img = document.createElement("img");
-					img.src = url;
-					img.onload = function() {
-						var canvas2 = document.createElement("canvas");
-						canvas2.width = (canvas.width) * 2;
-						canvas2.height = (canvas.height) * 2;
-						var ctx2 = canvas2.getContext("2d");
-						ctx2.drawImage(img, 0, 0, canvas2.width, canvas2.height);
-						url = canvas2.toDataURL();
-						//以下代码为下载此图片功能
-						var triggerDownload = $("<a>").attr("href", url).attr("download", "sprite.png").appendTo("body");
-						triggerDownload[0].click();
-						triggerDownload.remove();
-					};
-					/**/
+					//以下代码为下载此图片功能
+					var triggerDownload = $("<a>").attr("href", url).attr("download", "sprite.png").appendTo("body");
+					triggerDownload[0].click();
+					triggerDownload.remove();
 					$('#box').css('border', '');
 				}
 			});

@@ -14,7 +14,7 @@
 		<div id="box" name="box">box</div>
 
 		<script>
-			var w, i = 1;
+			var w, i = 1,time1;
 			var $box = document.querySelector('[name="box"]');
 			console.log($box);
 
@@ -23,7 +23,7 @@
 					if(typeof(w) == "undefined") {
 						w = new Worker("js/workers.js");
 					}
-					setInterval(function() {
+					time1 = setInterval(function() {
 						i++;
 						w.postMessage({
 							id: i,
@@ -48,6 +48,7 @@
 			function stopWorker() {
 				w.terminate();
 				w = undefined;
+				clearInterval(time1);
 			}
 		</script>
 
