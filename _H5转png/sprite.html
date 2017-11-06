@@ -66,6 +66,7 @@
 			setTimeout(function() {
 				console.log(fileData.filesA);
 				var filesA = fileData.filesA;
+				$('#box').html('');
 				if(filesA.length) {
 					for(var i = 0, len = filesA.length; i < len; i++) {
 						var $div = $('<div style="background-image: url(' + filesA[i]['base64'] + ');">')
