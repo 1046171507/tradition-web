@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="papaparse.min.js"></script>
+		<script src="arr2json.js"></script>
+	</head>
+
+	<body>
+
+	</body>
+	<script type="text/javascript">
+		Papa.parse('./data.csv', {
+			download: true,
+			complete: function(results) {
+				var mjson = arr2json(results);
+				console.log(mjson);
+			}
+		});
+	</script>
+
+</html>
