@@ -22,6 +22,19 @@
 			</select>
 		</div>
 		<div>
+			<select style="width: 200px;"  placeholder="有提示语">
+				<option>168.com</option>
+				<option>163.net</option>
+				<option>126.com</option>
+				<option>164.com</option>
+				<option>164.net</option>
+				<option>127.com</option>
+				<option>165.com</option>
+				<option>165.net</option>
+				<option>128.com</option>
+			</select>
+		</div>
+		<div>
 			<div class="Mselect">
 				<p class="Mchecked"><i>提示语</i></p>
 				<input type="hidden" name="" id="" value="" />
@@ -55,12 +68,12 @@
 			$(document).on('change', 'input,select', function() {
 				console.log('模拟触发原生的change事件this.val:', $(this).val());
 			});
-			
+
 			setTimeout(function() {
 				$('#MselectBox').html('<div class="Mselect"> <p class="Mchecked">1</p> <input type="hidden" name="" id="" value="" /> <div class="MoptionBox MScroll"> <span class="Moption" value="01">1</span> <span class="Moption" value="02">2</span> <span class="Moption" value="03">3</span> <span class="Moption" value="04">4</span> <span class="Moption" value="05">5</span> <span class="Moption" value="06">6</span> <span class="Moption" value="07">7</span> </div> </div>');
 
 				$('#selectBox').html('<select placeholder="提示语" style="width: 200px;"> <option>163.com</option> <option>163.net</option> <option>126.com</option> <option>163.com</option> <option>163.net</option> <option>126.com</option> <option>163.com</option> <option>163.net</option> <option>126.com</option> </select>');
-				
+
 				$('#select-1').append('<option>129.com</option>')
 			}, 2000);
 		});
