@@ -56,6 +56,8 @@ select,
 textarea {
   font-size: 100%;
   font-family: "microsoft yahei", Arial;
+  border: none;
+  outline: none;
 }
 label,
 button,
