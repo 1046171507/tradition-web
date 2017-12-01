@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="box">
+			
+		</div>
+		<script type="text/javascript">
+			//获取任何类型
+			function type(object) {
+				return Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1];
+			};
+			console.log(type([1,2,3]))
+		</script>
+	</body>
+
+</html>
