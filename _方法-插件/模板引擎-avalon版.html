@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://cdn.staticfile.org/avalon.js/2.2.4/avalon.js"></script>
+	</head>
+
+	<body>
+		<div class="box" ms-controller="app">
+			不能进行更深入封装,封装后IE6,7,8不支持了.
+			<p>{{list.a}}</p>
+			<p ms-for="value in list.b">{{value}}</p>
+			<p ms-for="(value, key) in list.b">{{key}}:{{value}}</p>
+			<p ms-for="value in list.c">{{value}}</p>
+			<p ms-for="(value,i) in list.c">{{i}}:{{value}}</p>
+			<p id="d-show">点击显示list>d>d1:<span ms-if="list.d && list.d.show" style="color: red;">{{list.d.d1}}</span></p>
+		</div>
+
+		<script>
+			var vm = avalon.define({
+				$id: "app",
+				list: {
+					a: 1,
+					b: {
+						b1: 21,
+						b2: 22,
+						b3: 23
+					},
+					c: [31, 32, 33],
+					d: {
+						show: false,
+						d1: 444444
+					}
+				}
+			});
+
+			$('#d-show').click(function() {
+				vm.list.c.set(1, '数组的某一位用set改变');
+				vm.list.d = {
+					show: true,
+					d1: 55555
+				};
+			});
+		</script>
+	</body>
+
+</html>
