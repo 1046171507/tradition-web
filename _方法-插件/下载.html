@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<button id="btn-1">下载</button>
+		<script type="text/javascript">
+			var downFn = function(url, name) {
+				var oSpan = document.createElement("span");
+				var oA = document.createElement("a");
+				oA.setAttribute('href', url);
+				oA.setAttribute('download', name);
+				oA.appendChild(oSpan);
+				document.getElementsByTagName('body')[0].appendChild(oA);
+				oSpan.click();
+				document.getElementsByTagName('body')[0].removeChild(oA);
+			};
+
+			$('#btn-1').click(function() {
+				downFn('mbase.js', 'name.js');
+			});
+		</script>
+	</body>
+
+</html>
