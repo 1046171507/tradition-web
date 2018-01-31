@@ -155,10 +155,10 @@ opacity {
   /* 不写在IE下固定定位与它交叉后会抖*/
 }
 /*蒙层*/
-.mengceng {
+.mask {
   position: relative;
 }
-.mengceng:after {
+.mask:after {
   content: '';
   display: block;
   width: 100%;
@@ -186,23 +186,14 @@ opacity {
   _position: absolute;
 }
 /* 输入框placeholder字体颜色*/
-::-webkit-input-placeholder {
-  color: #DDDDDD;
-}
-:-moz-placeholder {
-  color: #DDDDDD;
-}
-::-moz-placeholder {
-  color: #DDDDDD;
-}
+::-webkit-input-placeholder,
+:-moz-placeholder,
+::-moz-placeholder,
 :-ms-input-placeholder {
   color: #DDDDDD;
 }
 /*移动端去阴影*/
-.mobile {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-tap-highlight-color: transparent;
-}
+.mobile,
 .a_mobile {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
@@ -220,15 +211,6 @@ opacity {
 .textLR {
   text-align: justify;
   text-justify: inter-word;
-}
-.textT5 {
-  text-indent: 0.5em;
-}
-.textT1 {
-  text-indent: 1em;
-}
-.textT2 {
-  text-indent: 2em;
 }
 /*文本强制换行*/
 .textQzhh {
@@ -273,7 +255,7 @@ hr {
 }
 .flexItem {
   -webkit-box-flex: 1;
-  flex: auto;
-  -ms-flex: auto;
+  -ms-flex: 1;
+  flex: 1;
 }
 /*媒体查询*/

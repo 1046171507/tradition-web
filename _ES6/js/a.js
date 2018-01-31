@@ -1,5 +1,9 @@
-var sex="boy";
-var echo=function(value){
-　　console.log(value)
+console.log('a.js');
+
+let moduleName = "A-Module";
+
+function getModuleName() {
+	return moduleName;
 }
-export {sex,echo}
+
+export default getModuleName;

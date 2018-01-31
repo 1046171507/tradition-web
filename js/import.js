@@ -37,7 +37,6 @@ var requireVue = function(url, async) {
 		type: "get",
 		url: url,
 		async: asyncB,
-		accepts: 'text',
 		success: function(data) {
 			component = toComponent(data)
 		}
@@ -64,7 +63,6 @@ var require = function(url, asy) {
 		type: "get",
 		url: url,
 		async: asyncB,
-		accepts: 'script'
 	})
 };
 /* requireT同步加载html */
@@ -84,14 +82,14 @@ var requireT = function(url, asy) {
 		url: $hrefSrc,
 		async: $async,
 		success: function(data) {
-			content = $hrefID ? $(data).filter($hrefID) : $(data)
+			content = $hrefID ? $(data).filter($hrefID) : data
 		},
 		error: function() {
 			console.error('文件' + $hrefSrc + '请求失败')
 		}
 	});
 	if(content.length != 0) {
-		return content.get(0).outerHTML
+		return $hrefID ? content.get(0).outerHTML : content;
 	} else {
 		return ''
 	}

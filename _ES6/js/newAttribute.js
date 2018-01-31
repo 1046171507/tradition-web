@@ -124,8 +124,10 @@ Fn3.hello(); //但对象中中的对象还是指向同一个地址
 console.log(Fn3.obj); //但对象中中的对象还是指向同一个地址
 
 console.log(Object.keys(Fn4), 'keys');
-console.log(Object.values(Fn4), 'values');
-console.log(Object.entries(Fn4), 'entries');
+/*ie10不支持*/
+//console.log(Object.values(Fn4), 'values');
+/*ie10不支持*/
+//console.log(Object.entries(Fn4), 'entries');
 
 let Fn42 = JSON.parse(JSON.stringify(Fn4)); //这种方式实现深复制有一个缺点就是必须给JSON.parse方法传入的字符串必须是合法的JSON，否则会抛出错误//不能拷贝函数
 console.log(Fn42)

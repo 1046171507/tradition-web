@@ -12,30 +12,31 @@
 	<body>
 		<div class="box">
 		</div>
-		<div class="box" vue-data='list'>
-			<p>{{list.a}}</p>
-			<p v-for="value in list.b">{{value}}</p>
-			<p v-for="(value, key) in list.b">{{key}}:{{value}}</p>
-			<p v-for="value in list.c">{{value}}</p>
-			<p v-for="(value,i) in list.c">{{i}}:{{value}}</p>
-			<p id="d-show">点击显示list>d>d1:<span v-if="list.d && list.d.show" style="color: red;">{{list.d.d1}}</span></p>
+		<div>
+			<ul id="sidebar-view" class="box" vue-data='d'>
+				<li v-for="v in d.list">
+					1111
+				</li>
+			</ul>
 		</div>
 	</body>
 
 	<script type="text/javascript">
 		$(function() {
-			$('.box').vueData({
-				a: 1,
-				b: {
-					b1: 21,
-					b2: 22,
-					b3: 23
-				},
-				c: [31, 32, 33],
-				d: {
-					show: false,
-					d1: 444444
-				}
+			$('#sidebar-view').vueData({
+				list: [{
+					"id": "103",
+					"icon": "&#xe698;",
+					"alt": "layUI元素/模块",
+					"title": "layui官网",
+					"content": "http://www.layui.com/doc/#get"
+				}, {
+					"id": "103",
+					"icon": "&#xe698;",
+					"alt": "layUI元素/模块",
+					"title": "layui官网",
+					"content": "http://www.layui.com/doc/#get"
+				}]
 			});
 
 			$('#d-show').click(function() {

@@ -1,4 +1,11 @@
-// b.js
-import { sex, echo } from "./a"
-console.log(sex) // boy
-echo(sex) // boy
+console.log('b.js');
+
+let moduleName = "B-Module";
+
+function getModuleName() {
+	return moduleName;
+}
+
+export {
+	getModuleName
+};
