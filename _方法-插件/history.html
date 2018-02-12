@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<input type="text" placeholder="必您确定要退出页面吗(页面没有聚焦过,不会触发)？" style="width: 400px;"/>
+		<div id="history">
+			<a href="/XXX">/XXX</a>
+			<br />
+			<a href="./YYY">./YYY</a>
+			<br />
+			<a href="../ZZZ">./ZZZ</a>
+			<br />
+			<a href="?WWW">?WWW</a>
+		</div>
+		<div>
+			<a href="?a">?a</a>
+			<br />
+			<a href="javascript:;" onclick="history.back()">history.back() 上一页</a>
+			<br />
+			<a href="javascript:;" onclick="history.forward()">history.forward() 下一页</a>
+			<br />
+			<a href="javascript:;" onclick="history.go(-2)">history.go(-2) 后退二页</a>
+			<br />
+			<a href="javascript:;" onclick="history.go(0)">history.go(0) 刷新当前页</a>
+		</div>
+		<script type="text/javascript">
+			$("#history").on("click", 'a', function(event) {
+				var query = this.href;
+				if(history.pushState) {
+					// history处理
+					var oHref = this.href;
+					var oTitle = $(this).text();
+					document.title = oTitle;
+					//history中新添加一条
+					history.pushState({
+						title: oTitle
+					}, oTitle, oHref);
+					/*
+					//history中新修改当前条
+					history.replaceState({
+						title: oTitle
+					}, oTitle, oHref);
+					*/
+				}
+				return false;
+			});
+			if(history.pushState) {
+				//上一页下一页触发事件
+				$(window).on("popstate", function() {
+					console.log(111)
+				});
+			};
+			
+			window.onbeforeunload = function() {
+				return "必您确定要退出页面吗(页面没有聚焦过,不会触发)？";
+			}
+		</script>
+	</body>
+
+</html>
