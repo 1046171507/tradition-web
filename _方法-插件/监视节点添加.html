@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/watchHtml.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#box').html("xxx");
+				$('#box').append("<div>222</div>");
+				$('#box').html("<div>333</div>");
+				$('#box').prepend("<div>444</div>");
+				$('#box').before("<div>555</div>");
+				$('#box').after("<div>666</div>");
+				$("#box-2").replaceWith("<b>888</b>");
+				setTimeout(function(){
+					$('#box').append('<select name="interest" lay-filter="aihao"> <option value=""></option> <option value="0">写作</option> <option value="1" selected="">阅读</option> <option value="2">游戏</option> <option value="3">音乐</option> <option value="4">旅行</option> </select>')
+				},2000);
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="box">111</div>
+		<div id="box-2">999</div>
+	</body>
+
+</html>
