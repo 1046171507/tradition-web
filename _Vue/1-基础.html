@@ -4,6 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 		<script src="js/vue.min.js"></script>
 		<style type="text/css">
 			body {
@@ -12,6 +13,20 @@
 			
 			v-template {
 				display: none;
+			}
+			
+			iafter {
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+			}
+			
+			input+iafter {
+				background: #0077FF;
+			}
+			
+			input:checked+iafter {
+				background: #0000FF;
 			}
 			
 			h4 {
@@ -234,16 +249,17 @@
 		</script>
 		<!--注册全局组件-->
 		<script type="text/x-template" id="hello-world-template">
-			<h3>Hello hello hello(官方提供的非大文件组件)</h3>
+			<h3 style="color: red;">Hello hello hello(官方提供的非大文件组件)</h3>
 		</script>
 		<v-template>
 			<template id="template-1">
-				<span>
-				<input type="checkbox" v-bind:name="name?name:''" v-bind:checked="checked" v-bind:id="id" v-bind:value="value" v-on:click="Pclick" style="display: none;" />
-				<iafter></iafter>
-				<span v-text="text"></span>
-				<button v-on:click="counter += 1;">{{ counter }}</button>
-				</span>
+				<div>
+					<span style="color: red;">注册全局组件</span>
+					<input type="checkbox" v-bind:name="name?name:''" v-bind:checked="checked" v-bind:id="id" v-bind:value="value" v-on:click="Pclick" style="display: none;" />
+					<iafter></iafter>
+					<span v-text="text"></span>
+					<button v-on:click="counter += 1;">{{ counter }}</button>
+				</div>
 			</template>
 			<script>
 				//组件与父级通信
